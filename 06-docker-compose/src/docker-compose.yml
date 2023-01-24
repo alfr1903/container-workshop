@@ -1,0 +1,30 @@
+version: "3.7"
+
+services:
+
+  conduit-frontend:
+    container_name: conduit-frontend
+    restart: always
+    ports:
+      - '4100:4100'
+    build: ./frontend/react-realworld
+    environment:
+      - REACT_APP_BACKEND_URL="http://localhost:[BACKEND_PORT]"
+  
+  conduit-backend:
+    build: 
+    environment:
+      - NODE_OPTIONS="--max-old-space-size=4096"
+      - TERM=xterm
+
+  db:
+    container-name: database
+    image: mysql:latest
+    ports: 
+      - "3306:3306"
+    volumes:
+      - realworld:/data/db
+      - ./backend/node-realworld/packages/sql/dump/init.sql:/docker-entrypoint-initdb.d/init.sql
+
+volumes:
+  realworld:  
