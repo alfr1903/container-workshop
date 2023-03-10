@@ -1,4 +1,4 @@
-# Dockerfile
+# Run an Application in a Container
 
 If at any point something is unclear, please refer
 to Docker's [Dockerfile
@@ -183,7 +183,8 @@ mv <path/to/the/react-workshop/on/your/machine> 02-dockerfile
 
 Or if you have not participated in the workshop or you were not able
 to finish, copy the complete project
-from [the solutions folder](../69-LF/02-dockerfile/react-workshop).
+from [the solutions folder](../69-learning-material/02-run-app-in-container/react-workshop)
+.
 
 ```bash
 cp 69-LF/02-dockerfile/react-workshop 02-dockerfile/react-workshop
@@ -191,7 +192,7 @@ cp 69-LF/02-dockerfile/react-workshop 02-dockerfile/react-workshop
 
 Before you continue on the tasks make sure that your application is
 running locally. You might not have access to the API keys to connect
-to openAI so we will exchange the backend with a some simpeler
+to openAI so we will exchange the backend with a some simpler
 backend. Copy the content of `index.ts` and replace it with the
 content of your current `index.ts` file located
 in `react-workshop/backend`.
@@ -290,6 +291,14 @@ name for the image. The `react-workshop` in the end describes the path
 to where docker engine should find the dockerfile to build the image
 upon.
 
+To ensure that an image was actually made go to Docker Desktop and you
+should find your newly created image under _Images_. Or you may get
+equal information by typing the following command in your terminal:
+
+```bash
+docker images
+```
+
 <details>
 <summary>✅ Answer 2.1</summary>
 
@@ -323,8 +332,44 @@ container:
 docker run -d -name react-frontend-container react-frontend-image:latest
 ```
 
+To ensure that a container was actually made go to Docker Desktop and
+you
+should find your newly created container under _Containers_. Or you
+may get
+equal information by typing the following command in your terminal (
+adding `-a` lists all not-running containers as well):
+
+```bash
+docker ps
+docker ps -a
+```
+
+You may also see the logs (in realtime by adding the flag `--follow`):
+
+```bash
+docker logs react-frontend-container
+docker logs react-frontend-container --follow
+```
+
+Or you may inspect the containers configurations with the command:
+
+```bash
+docker inspect react-frontend-container
+```
+
 <details>
-<summary>Interested in more details on `docker run` command?</summary>
+<summary>🤫 Want a life hack to show all your friends?</summary>
+
+Instead of entering the name of the container, which in out case is _
+react-frontend-container_, we can also use a selection (from the
+beginning) of the container ID which is enough for Docker Engine to
+distinct the container from other containers running on your machine.
+
+</details>
+
+
+<details>
+<summary>💡 Interested in more details on `docker run` command?</summary>
 
 ## Flags
 
@@ -361,7 +406,7 @@ container. These are most often used together, in the case when you
 want to
 interact with the container.
 
-📝 Run for example:
+Run for example:
 
 ```bash
 docker run --rm -it ubuntu
@@ -389,7 +434,7 @@ additionally specifying `--workdir`, that path may be chosen as the
 starting
 directory.
 
-📝 Run the following:
+Run the following:
 
 ```bash
 docker run --rm -it -v $HOME:/hostuser --workdir /hostuser ubuntu
@@ -412,13 +457,13 @@ local machine to another port of the container. The syntax
 is `-p <local
 port>:<container port>`.
 
-📝 Run the nginx container and port-forward any local port to `80`
+Run the nginx container and port-forward any local port to `80`
 inside the
 container. Then open `localhost:` followed by the chosen port in a
 browser and
 see if you are able to communicate with the container.
 
-📝 Inspect the container logs. If you ran the container with `-it` you
+Inspect the container logs. If you ran the container with `-it` you
 will see
 them instantly. If in detached mode (`-d`), use `docker ps`
 and `docker logs`.

@@ -46,6 +46,6 @@ for the majority of people.
 
 1. [Docker Desktop](./01-docker-desktop)
 2. [Run App in Container](./02-run-app-in-container)
-3. [Exec Into Container](./03-exec-into-container)
+3. [Enter Running Container](./03-enter-running-container)
 4. [Multi Container Communication](./04-multi-container-communication)
 5. [Learning Material](./69-learning-material)
