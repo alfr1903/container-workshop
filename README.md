@@ -2,7 +2,7 @@
 
 Containers have been popularized by _Docker, Inc._
 and their tooling. The
-concepts are thus often refered to as _docker_
+concepts are thus often referred to as _docker_
 things, e.g. _docker files_,
 _docker images_, _docker containers_. However,
 container technology is much more
@@ -35,19 +35,17 @@ for the majority of people.
 - [Git](https://git-scm.com/) - as you probably
   want
   to `git clone https://github.com/standeren/container-workshop.git`
-- Create a user
-  on [DockerHub](https://hub.docker.com/) or any
-  other container
-  image registry.
+- This is a follow-up workshop on
+  a [react workshop](https://github.com/Markusdreyer/react-workshop).
+  Even though it is recommended to be familiar with the application
+  made in that
+  workshop, it is not a requirement for being able to complete this
+  course.
 
 ## Content
 
 1. [Docker Desktop](./01-docker-desktop)
-2. [Dockerfile](./02-dockerfile)
-3. [Container Images](./03-container-images)
-4. [Running Containers](./04-running-containers)
-5. [Build and Publish Container Images](./05-build-and-publish)
-6. [Docker Compose](./06-docker-compose)
-7. [Vulnerability Scanning](./07-vulnerability-scanning)
-8. [Extras](./08-extras)
-9. [Solutions](./69-LF)
+2. [Run App in Container](./02-run-app-in-container)
+3. [Exec Into Container](./03-exec-into-container)
+4. [Multi Container Communication](./04-multi-container-communication)
+5. [Learning Material](./69-learning-material)

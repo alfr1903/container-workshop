@@ -36,7 +36,9 @@ remote host.
 The approach of containerizing an application
 starts by
 making a **Dockerfile** which will be _built into
-an image_.
+an
+image_ ([More details on Dockerfile in the next chapter](/02-dockerfile))
+.
 If then _running the image_ you will get a _
 running
 container_
@@ -68,7 +70,7 @@ easily sharing and running applications between
 physical
 computers.
 
-<img src="images/desktop-images.png" alt="Docker Desktop - Images" height="320">
+<img src="images/desktop-images.png" alt="Docker Desktop - Images" height="320" class="center">
 
 In Docker Desktop you can manage your images by
 locating to
@@ -92,7 +94,7 @@ images. And all
 images are based on different commands which will
 be
 explained in more
-detail [later in the course](./02-dockerfile).
+detail [later in the course](/02-dockerfile).
 Each time
 Docker executes a command a new layer is made
 which is
@@ -101,7 +103,7 @@ and after
 the command was executed.
 </details>
 
-<img src="images/desktop-image-info.png" alt="Docker Desktop - Image info" height="320">
+<img src="images/desktop-image-info.png" alt="Docker Desktop - Image info" height="320" class="center">
 
 ## Containers
 
@@ -124,7 +126,7 @@ will behave, such as:
 - What environment variables it uses.
   to mention some characteristics.
 
-<img src="images/desktop-containers.png" alt="Docker Desktop - Containers" height="320">
+<img src="images/desktop-containers.png" alt="Docker Desktop - Containers" height="320" class="center">
 
 In Docker Desktop you can see the containers that
 either run
@@ -153,7 +155,7 @@ then take care of making the actual reference from
 the containers mount path to the data persisted
 some where else on the host machine.
 
-<img src="images/desktop-volumes.png" alt="Docker Desktop - Containers" height="320">
+<img src="images/desktop-volumes.png" alt="Docker Desktop - Containers" height="320" class="center">
 
 In Docker Desktop you can see all volumes on your
 local machine by locating to the volumes tab on
@@ -172,7 +174,7 @@ on a container, but instead of letting Docker take
 care of the mounting and referencing, you are
 explicitly providing the container with a
 reference path to the host machine.
-<img src="images/volume-vs-bind-mounts.png" alt="Docker Desktop - Volumes VS Bind Mounts" height="320">
+<img src="images/volume-vs-bind-mounts.png" alt="Docker Desktop - Volumes VS Bind Mounts" height="320" class="center">
 </details>
 
 ## Resources
