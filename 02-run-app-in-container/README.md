@@ -323,6 +323,129 @@ container:
 docker run -d -name react-frontend-container react-frontend-image:latest
 ```
 
+<details>
+<summary>Interested in more details on `docker run` command?</summary>
+
+## Flags
+
+The docker run command has a lot of flags that configure how the
+container is
+run. These are placed in between `docker run` and the the name of the
+image.
+
+E.g. `docker run --rm -it -p 8080:80 -v $PWD/05-*/nginx/html:/usr/share/nginx/html nginx`
+
+### `--rm`
+
+`--rm` may be specified to automatically delete a container once it is
+stopped.
+Comes in handy when you start a lot of containers you know you will no
+longer
+need once stopped.
+
+### `-d`
+
+`-d` is short for `--detach`. For long-running containers such as a
+web server,
+you might want to run the container in the background instead of it
+occupying a
+terminal.
+
+### `-it`
+
+`-it` is a combination of both `--interactive` and `--tty`. `-t`
+essentially
+creates a virtual terminal session and `-i` forwards what you write to
+the
+container. These are most often used together, in the case when you
+want to
+interact with the container.
+
+📝 Run for example:
+
+```bash
+docker run --rm -it ubuntu
+```
+
+You are now in a terminal of an ubuntu distribution of Linux and may
+play around
+without causing harm to you actual system. Such an image may be
+extended with a
+custom Dockerfile, to create a playground with a lot of tooling
+installed - that
+may be totally reset at will.
+
+Type `exit` to quit and destroy (because of `--rm`) the container btw.
+
+### `-v` and `--workdir`
+
+`-v` is short for `--volume`. In the case with ubuntu above, you may
+want to
+make files from your own system accessible inside the container. `-v`
+lets you
+_mount_ an (absolute) path from your host into a path of the
+container. By
+additionally specifying `--workdir`, that path may be chosen as the
+starting
+directory.
+
+📝 Run the following:
+
+```bash
+docker run --rm -it -v $HOME:/hostuser --workdir /hostuser ubuntu
+```
+
+If you now run `ls` inside the container, you should see the content
+of your
+computers home directory. Use with care though, you can delete stuff
+as well.
+
+Sidenote: `docker volume` may be used to create additional volumes
+that are
+initially empty and may be mounted into one or more containers.
+
+### `-p`
+
+`-p` is short for `--publish` (aka port). It is used to forward a port
+on the
+local machine to another port of the container. The syntax
+is `-p <local
+port>:<container port>`.
+
+📝 Run the nginx container and port-forward any local port to `80`
+inside the
+container. Then open `localhost:` followed by the chosen port in a
+browser and
+see if you are able to communicate with the container.
+
+📝 Inspect the container logs. If you ran the container with `-it` you
+will see
+them instantly. If in detached mode (`-d`), use `docker ps`
+and `docker logs`.
+
+### `-e`
+
+`-e` is short for `--env`. It is often used to pass the container
+secrets that
+one does not want to build into the image (e.g `--env KEY=123`).
+Environment
+values are not yet determined at build time or the values vary between
+deployments. It may be the url to the api, that differ in dev and
+production, or
+the logging format to use.
+
+### `--network` and `--name`
+
+`docker network` is used to create and manage networks. Containers may
+be
+entered into a network when started, and can then communicate with
+other
+containers by names rather than IP addresses (e.g. the url to backend
+is
+`http://backend:3000` because it was started with `--name backend`).
+
+</details>
+
 Open Docker Desktop and see that the container is running. Click on
 the container and you should see the following logs:
 
