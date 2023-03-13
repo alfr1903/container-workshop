@@ -97,10 +97,74 @@ And, curl the backend container:
 curl http://<BACKEND_CONTAINER_IP_ADDRESS>:5050/keepAlive
 ```
 
-### ✅ Answer 4.1
+<details>
+<summary>✅ Answer 4.1</summary>
 
-Did you get a response `Hi frontend`?
+Did you get a response saying `Hi frontend`?
+
+</details>
 
 ### Task 4.2 - Create a Network and Connect Containers
+
+This is a fully adequate approach of achieving communication between
+containers, but it might not be the most neet way? Wouldn't it be
+better if we could just refer to the containers by their container
+names which we assigned to them when running them, i.e. _
+react-workshop-frontend_ and _react-workshop-backend_? Well, you
+guessed it - that is exactly what we can do.
+
+In order to do so we need to make a virtual network:
+
+```bash
+docker network create -d bridge container-workshop-network
+```
+
+Inspect the network to see that there are no containers in this
+network - `containers` field is empty:
+
+```bash
+docker inspect container-workshop-network
+```
+
+Then, connect the containers to the network:
+
+```bash
+docker network connect container-workshop-network <container_name>
+```
+
+Inspect the network again - can you find the newly added containers?
+
+```bash
+docker inspect container-workshop-network
+```
+
+<details>
+<summary>✅ Answer 4.2</summary>
+
+When inspecting the network after connecting the containers you should
+get an output similar to this:
+
+```bash
+...,
+"Containers": {
+            "e94c870a95368926b7324ae59e7ec16f58a367443f84c56abdfd8ba341189bf1": {
+                "Name": "react-workshop-backend",
+                "EndpointID": "bef8c0c026739c9ece53ceead8ae0b1a25d5b2094c6256f3995904750ae2aa9c",
+                "MacAddress": "02:42:ac:14:00:03",
+                "IPv4Address": "172.20.0.3/16",
+                "IPv6Address": ""
+            },
+            "f3b030a96e0fbfcb8c57116e9243e68e3e7bcb92c94a344d65230d51c0a99c03": {
+                "Name": "react-workshop-frontend",
+                "EndpointID": "09147b9e632d8b90a35ecbdff710289d4ddd8dd30aec085b936323ce4a8bef3c",
+                "MacAddress": "02:42:ac:14:00:02",
+                "IPv4Address": "172.20.0.2/16",
+                "IPv6Address": ""
+            }
+        },
+        ...,
+```
+
+</details>
 
 ### Task 4.3 - Confirm User-Based Connectivity
