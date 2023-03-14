@@ -85,7 +85,12 @@ Next, exec into the frontend container:
 docker exec -it react-workshop-frontend bash
 ```
 
-Then, install `curl` with apk:
+At this point we could simply `ping` the other backend container, but
+then we would only know that we have reached the container, but not if
+we can speak to the api running inside it. To illustrate that we can
+reach the port where the api runs we need to `curl` the endpoint
+instead. Curl is not a default package included in the alpine image,
+hence we need to install `curl` with apk:
 
 ```bash
 apk add curl
@@ -113,7 +118,18 @@ names which we assigned to them when running them, i.e. _
 react-workshop-frontend_ and _react-workshop-backend_? Well, you
 guessed it - that is exactly what we can do.
 
-In order to do so we need to make a virtual network:
+While still inside the frontend container shell, type the above
+command again, but instead of using the IP-address you swap that part
+with the name of the backend container:
+
+```bash
+curl http://react-workshop-backend:5050/keepAlive
+```
+
+No connection? 🤔This is because the frontend container know nothing
+about the other more than the IP address of other containers by
+default. In order to make this work we first
+need to make a virtual network:
 
 ```bash
 docker network create -d bridge container-workshop-network
@@ -168,3 +184,16 @@ get an output similar to this:
 </details>
 
 ### Task 4.3 - Confirm User-Based Connectivity
+
+Let's try the `curl` command from the previous task and see if we have
+connection now:
+
+```bash
+curl http://react-workshop-backend:5050/keepAlive
+```
+
+If you receive the `Hi frontend` response again, you have established
+the connection.
+
+You have also finished a container workshop and can now call yourself
+a certified (_by Netlights definition_) application containerizator 🥳

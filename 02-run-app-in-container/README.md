@@ -249,7 +249,7 @@ app.post('/recipes', async (req: Request, res: Response) => {
 
 app.get("/keepAlive", async (req: Request, res: Response) => {
     console.log("We are live");
-    res.send("Hi frontend")
+    res.send("Hi frontend 👋🏼\n")
 });
 ```
 
