@@ -591,7 +591,7 @@ to `5050`.
 The full command should be like this:
 
 ```bash
-docker run -d -p 3001:5050 -name react-frontend-container react-frontend-image:latest
+docker run -d -p 3001:5050 --name react-frontend-container react-frontend-image:latest
 ```
 
 </details>
