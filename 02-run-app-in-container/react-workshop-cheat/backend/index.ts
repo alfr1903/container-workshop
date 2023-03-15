@@ -47,7 +47,7 @@ app.post('/recipes', async (req: Request, res: Response) => {
     res.send(recipe)
 });
 
-app.get("/keepAlive", async (req: Request, res: Response) => {
+app.get("/checkLiveness", async (req: Request, res: Response) => {
     console.log("We are live");
     res.send("Hi frontend 👋🏼\n")
 });
