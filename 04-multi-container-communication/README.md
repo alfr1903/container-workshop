@@ -99,7 +99,7 @@ field.
 Next, exec into the frontend container:
 
 ```bash
-docker exec -it react-frontend-container bash
+docker exec -it react-frontend-container sh
 ```
 
 At this point we could simply `ping` the other backend container, but
