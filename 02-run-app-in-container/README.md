@@ -534,7 +534,7 @@ docker rm react-frontend-container
 And run the container again with an additional flag:
 
 ```bash
-docker run -d -p 3001:3000 -name react-frontend-container react-frontend-image:latest
+docker run -d -p 3001:3000 --name react-frontend-container react-frontend-image:latest
 ```
 
 The `-p` flag exposes a port on your local machine and maps it to a
