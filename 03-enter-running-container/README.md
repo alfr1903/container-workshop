@@ -1,4 +1,4 @@
-# Enter Running Container
+# Enter a Running Container
 
 If you took a ride on the fair waters with the final task, task 1.5,
 in the first session, [Docker Desktop](/01-docker-desktop), you
@@ -6,8 +6,8 @@ encountered a new command: `docker exec`. See the following two
 examples of usage:
 
 ```bash
-docker exec <container name/id> ls
-docker exec -it <container name/id> bash
+docker exec <container_name/id> ls
+docker exec -it <container_name/id> bash
 ```
 
 `docker exec` enables you to execute another process within the
@@ -34,7 +34,7 @@ First you need to run the following command to get into the
 interactive shell of the running container:
 
 ```bash
-docker exec -it <container-id/conainer-name> sh
+docker exec -it <container_id/conainer_name> sh
 ```
 
 Type `ls` to get some overview. You should see the following contents:
@@ -50,7 +50,7 @@ The heading `Your Name's Magic CookBook` is located in `App.tsx`, can
 you display it's content in the interactive shell terminal?
 
 <details>
-<summary>✅ Answer 3.1</summary>
+<summary>✅ Solution 3.1</summary>
 
 After opening the shell, type `cd src` where `App.tsx` exists.
 Type `ls` to ensure it. Type `cat App.tsx` to see the content.
@@ -83,9 +83,17 @@ apk add vim
 
 Now try running the above command again.
 
-_NB: If you have not used
-nano/vim before be careful when typing - make sure to follow the
-instructions on the bottom of the terminal first_
+> _NB: If you have not used
+> nano/vim before be careful when typing:_
+>
+>- _If using nano: make sure to follow the instructions on the bottom
+   > of the terminal first._
+>- _If using vim: first click `i` to enter interactive mode and `esc`
+   > when finished._
+>
+>_To quit the editor type `:wq` (short for write quit) if you wish to
+> save and `q` or `:q!` (short for quit) if you wish to abort the
+editing._
 
 Use the arrows to navigate to the line where the heading is set (
 🤫line 46) and change it to whatever you find soothing. Save the file

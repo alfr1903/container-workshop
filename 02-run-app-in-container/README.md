@@ -175,25 +175,21 @@ directory or adapt the destination path below.
 
 ```bash
 # Copy - recommended:
-cp <path/to/the/react-workshop/on/your/machine> 02-dockerfile
+cp <path/to/the/react-workshop/on/your/machine> 02-run-app-in-container
 
 # Or move:
-mv <path/to/the/react-workshop/on/your/machine> 02-dockerfile
+mv <path/to/the/react-workshop/on/your/machine> 02-run-app-in-container
 ```
 
 Or if you have not participated in the workshop or you were not able
-to finish, copy the complete project
-from [the solutions folder](../69-learning-material/02-run-app-in-container/react-workshop)
-.
+to finish, there is a bare minimum version of the project
+in [react-workshop-cheat](react-workshop-cheat) that you can use.
 
-```bash
-cp 69-LF/02-dockerfile/react-workshop 02-dockerfile/react-workshop
-```
-
-Before you continue on the tasks make sure that your application is
-running locally. You might not have access to the API keys to connect
-to openAI so we will exchange the backend with a some simpler
-backend. Copy the content of `index.ts` and replace it with the
+If you are using your own project you might not have access to the API
+keys to connect
+to openAI so we will exchange the backend with a somewhat simpler
+backend. Copy the content of `index.ts` in the react-workshop-cheat
+folder and replace it with the
 content of your current `index.ts` file located
 in `react-workshop/backend`.
 
@@ -247,11 +243,15 @@ app.post('/recipes', async (req: Request, res: Response) => {
     res.send(recipe)
 });
 
-app.get("/keepAlive", async (req: Request, res: Response) => {
+app.get("/checkLiveness", async (req: Request, res: Response) => {
     console.log("We are live");
-    res.send("Hi frontend 👋🏼\n")
+    res.send("Hi frontend 👋 \n")
 });
 ```
+
+Before you continue on the tasks make sure that your
+application (or
+the cheat project) is running locally.
 
 1. Make sure your current working directory
    is `/contianer-workshop/02-dockerfile/react-workshop`. _Run `pwd`
@@ -273,22 +273,28 @@ app.get("/keepAlive", async (req: Request, res: Response) => {
 
 Stop the running process in the terminal where you started the
 frontend:
+
 On MacOS: `control^ + c`
 
-Open the `dockerfile` located in `02-dockerfile` and fill inn the
-remaining.
+Open the `dockerfile` located
+in `02-run-app-in-container/react-workshop-cheat` and fill
+inn the remaining.
 
-When you have filled in all the instructions, change you working
-directory to `02-dockerfile` and run the following command
+> If using your own project you will need to move the `dockerfile`
+> there. The root of the project is recommended.
+
+When you have filled in all the instructions, change your working
+directory to `02-run-app-in-container/<react_workshop_name>` and run
+the following command
 to build the image:
 
 ```bash
-docker build -t react-frontend-image react-workshop
+docker build -t react-frontend-image .
 ```
 
 The `-t` flag provides the image with a _tag_ which is essentially a
-name for the image. The `react-workshop` in the end describes the path
-to where docker engine should find the dockerfile to build the image
+name for the image. The `.` in the end describes the path
+to where Docker Engine should find the dockerfile to build the image
 upon.
 
 To ensure that an image was actually made go to Docker Desktop and you
@@ -300,7 +306,7 @@ docker images
 ```
 
 <details>
-<summary>✅ Answer 2.1</summary>
+<summary>✅ Solution 2.1</summary>
 
 ```dockerfile
 # ==== DOCKERFILE FOR FRONTEND =====
@@ -360,10 +366,14 @@ docker inspect react-frontend-container
 <details>
 <summary>🤫 Want a life hack to show all your friends?</summary>
 
-Instead of entering the name of the container, which in out case is _
+Instead of entering the name of the container, which in our case is _
 react-frontend-container_, we can also use a selection (from the
 beginning) of the container ID which is enough for Docker Engine to
 distinct the container from other containers running on your machine.
+
+```bash
+docker inspect <FIRST_CHAR_OF_CONTAINER_ID>
+```
 
 </details>
 
@@ -521,7 +531,7 @@ docker stop react-frontend-container
 docker rm react-frontend-container
 ```
 
-And run the container again:
+And run the container again with an additional flag:
 
 ```bash
 docker run -d -p 3001:3000 -name react-frontend-container react-frontend-image:latest
@@ -545,17 +555,19 @@ start the application. However, when doing this with docker we can
 inject the ENV variable as an instruction in the dockerfile.
 
 Try to edit the dockerfile to include the ENV variable `PORT=5050`. To
-see if it worked stop and remove the running container:
+see if it worked stop and remove the running container and remove the
+image:
 
 ```bash
 docker stop react-frontend-container
 docker rm react-frontend-container
+docker rmi react-frontend-image
 ```
 
 Rebuild the image:
 
 ```bash
-docker build -t react-frontend-image react-workshop --rebuild
+docker build -t react-frontend-image .
 ```
 
 And run a new container:
@@ -585,7 +597,7 @@ docker run -d -p 3001:5050 -name react-frontend-container react-frontend-image:l
 </details>
 
 <details>
-<summary>✅ Answer 2.4</summary>
+<summary>✅ Solution 2.4</summary>
 
 ```dockerfile
 # ==== DOCKERFILE FOR FRONTEND =====
