@@ -335,7 +335,7 @@ docker image we just built. Run the following command to run a
 container:
 
 ```bash
-docker run -d -name react-frontend-container react-frontend-image:latest
+docker run -d --name react-frontend-container react-frontend-image:latest
 ```
 
 To ensure that a container was actually made go to Docker Desktop and
