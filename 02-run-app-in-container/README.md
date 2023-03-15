@@ -576,7 +576,7 @@ _NB: do you see what you need to change in the below command for this
 to work?_
 
 ```bash
-docker run -d -p 3001:3000 -name react-frontend-container react-frontend-image:latest
+docker run -d -p 3001:3000 --name react-frontend-container react-frontend-image:latest
 ```
 
 <details>
