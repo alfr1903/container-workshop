@@ -55,7 +55,7 @@ Create an image for the backend:
 docker build -t workshop-backend-image <path_to_backend_dockerfile>
 
 # If the backend dockerfile is located in the same level as the frontend dockerfile
-docker build -t workshop-backend-image -f backend.docekrfile <path_to_backend_dockerfile>
+docker build -t workshop-backend-image -f backend.dockerfile <path_to_backend_dockerfile>
 ```
 
 Then you may run the container with the following command:
