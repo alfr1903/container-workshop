@@ -34,7 +34,7 @@ for the majority of people.
   fit your tools.
 - [Git](https://git-scm.com/) - as you probably
   want
-  to `git clone https://github.com/standeren/container-workshop.git`
+  to `git clone https://github.com/alfr1903/container-workshop.git`
 - This is a follow-up workshop on
   a [react workshop](https://github.com/Markusdreyer/react-workshop).
   Even though it is recommended to be familiar with the application
