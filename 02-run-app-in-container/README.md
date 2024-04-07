@@ -254,7 +254,7 @@ application (or
 the cheat project) is running locally.
 
 1. Make sure your current working directory
-   is `/contianer-workshop/02-dockerfile/react-workshop`. _Run `pwd`
+   is `/container-workshop/02-dockerfile/react-workshop`. _Run `pwd`
    if unsure_.
 2. Start up the frontend:
     1. `npm install`
@@ -430,7 +430,7 @@ custom Dockerfile, to create a playground with a lot of tooling
 installed - that
 may be totally reset at will.
 
-Type `exit` to quit and destroy (because of `--rm`) the container btw.
+Type `exit` to quit, and destroy (because of `--rm`), the container.
 
 ### `-v` and `--workdir`
 

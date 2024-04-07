@@ -16,7 +16,7 @@ experience of developing and working with
 containers. Any container technology
 tools may be used to build images and run
 containers, but Docker has been chosen
-in the examples as it likely the most accessible
+in the examples as it likely is the most accessible
 for the majority of people.
 
 ## Prerequisites

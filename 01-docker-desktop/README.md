@@ -39,8 +39,7 @@ making a **Dockerfile** which will be _built into
 an
 image_ ([More details on Dockerfile in the next chapter](/02-dockerfile))
 .
-If then _running the image_ you will get a _
-running
+If then _running the image_ you will get a _running
 container_
 which you can access by an address and a port.
 Continue
@@ -179,10 +178,9 @@ reference path to the host machine.
 
 ## Resources
 
-Click the cog icon in the top right and then _
-Resources_ to
+Click the cog icon in the top right and then _Resources_ to
 manage the CPU and memory allocated to Docker
-Desktop.]()
+Desktop.
 
 ## 🫵🏽 Try yourself
 
@@ -205,7 +203,8 @@ Figure out how much memory the container uses.
 
 Click on the running container in Docker Desktop
 and see the `Stats` tab and see that the container
-uses 5,4 MB memory.
+uses ~4 MB memory
+(results may vary slightly)
 </details>
 
 ### Task 1.2
@@ -220,8 +219,7 @@ and see the `Inspect` tab and see that the
 container has the following 4 environment
 variables defined:
 
-1. `PATH`: /usr/local/sbin:/usr/local/bin:
-   /usr/sbin:/usr/bin:/sbin:/bin
+1. `PATH`: /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 2. `NGINX_VERSION`: 1.23.3
 3. `PKG_RELEASE`: 1
 4. `NJS_VERSION`: 0.7.9
@@ -254,7 +252,7 @@ And create a new container that is using that
 volume:
 
 ```bash
-docker run -d -p 5000:5000 --name workshop-container -v workshop-volume:/data nginx
+docker run -d -p 5001:5001 --name workshop-container -v workshop-volume:/data nginx
 ```
 
 Figure out where on your local machine the data

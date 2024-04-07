@@ -65,7 +65,7 @@ By doing so you will see the change made to the source code
 immediately.
 
 For editing the content you might use a text editor such as `nano`
-or `vim` (Vim is recommended).
+or `vim`.
 
 ```sh
 nano App.tsx
