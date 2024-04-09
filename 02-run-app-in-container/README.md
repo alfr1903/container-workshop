@@ -160,15 +160,13 @@ it is a bit tricky to explain.
 
 Remember
 the [Next/React workshop](https://github.com/Kpaubert/oslo-tech-colledge/tree/finished-version/next-workshop)
-that you may have participated a while back?
-Wouldn't it be cool to containerize that?! 🤔Let's
-do it!
+that you may have participated in a while back?
+Wouldn't it be cool to containerize that?! 🤔 
+Let's do it!
 
 First, you need to move or copy the folder, _next-workshop_, that you
-cloned from the
-workshop. Use the following command to do so, but
-remember
-to change the template-path to the path where you
+cloned/used in the earlier workshop. Use the following command to do so, but
+remember to change the template-path to the path where you
 cloned the repository to. Make sure you
 have `container-workshop` as your working
 directory or adapt the destination path below.
@@ -188,10 +186,11 @@ in [next-workshop-cheat](next-workshop-cheat) that you can use.
 If you are using your own project you might not have access to the API
 keys to connect
 to openAI so we will exchange the backend with a somewhat simpler
-backend. Copy the content of `index.ts` in the react-workshop-cheat
-folder and replace it with the
-content of your current `index.ts` file located
-in `react-workshop/backend`.
+backend
+
+If you are using your own version of the [next-workshop](next-workshop) and have moved/copied it to _02-run-app-in-container_
+we will have to dumb down the ChatGPT backend a bit to reduce complexity. Navigate to `next-workshop/app/api/chat/route.ts` and replace the contents with the following:
+
 
 ```ts
 import { StreamingTextResponse } from 'ai';
@@ -251,22 +250,21 @@ export async function POST(req: NextRequest) {
 }
 ```
 
+The content above is also identical to `next-workshop-cheat/app/api/chat/route.ts` 
+if you would rather like to copy the contents from there
+
 Before you continue on the tasks make sure that your
 application (or
 the cheat project) is running locally.
 
 1. Make sure your current working directory
-   is `/container-workshop/02-dockerfile/react-workshop`. _Run `pwd`
+   is `/container-workshop/02-run-app-in-container/next-workshop`. _Run `pwd`
    if unsure_.
-2. Start up the frontend:
+2. Start up the frontend by building it:
     1. `npm install`
-    2. `npm start`
-3. Open a new terminal window
-4. Start up the backend:
-    1. `cd backend`
-    2. `npm install`
+    2. `npm run build -- --no-lint`
     3. `npm start`
-5. Open a web browser and go to `http://localhost:3000` and try to
+3. Open a web browser and go to `http://localhost:3000` and try to
    fetch some recipes!
 
 ### Task 2.1 - Dockerfile and Image
@@ -279,19 +277,19 @@ frontend:
 On MacOS: `control^ + c`
 
 Open the `dockerfile` located
-in `02-run-app-in-container/react-workshop-cheat` and fill
+in `02-run-app-in-container/next-workshop-cheat` and fill
 inn the remaining.
 
-> If using your own project you will need to move the `dockerfile`
-> there. The root of the project is recommended.
+> If using your own project you will need to move the `dockerfile` to `02-run-app-in-container/next-workshop`. 
+> The root of the project is recommended.
 
 When you have filled in all the instructions, change your working
-directory to `02-run-app-in-container/<react_workshop_name>` and run
+directory to `02-run-app-in-container/<next_workshop_name>` and run
 the following command
 to build the image:
 
 ```bash
-docker build -t react-frontend-image .
+docker build -t next-frontend-image .
 ```
 
 The `-t` flag provides the image with a _tag_ which is essentially a
@@ -314,15 +312,19 @@ docker images
 # ==== DOCKERFILE FOR FRONTEND =====
 # Use a Node 16 base image
 FROM node:16-alpine
+
 # Set the working directory to /app inside the container
 WORKDIR /app
-# Copy app files
-COPY src src
-COPY public public
+
+# Copy necessary source code folders/files
+COPY app app
 COPY [ "package.json", "package-lock.json", "tsconfig.json", "./"]
+
 # ==== BUILD =====
 # Install dependencies
 RUN npm install
+RUN npm run build
+
 # ==== RUN =======
 # Start the app
 CMD [ "npm", "start" ]
@@ -337,7 +339,7 @@ docker image we just built. Run the following command to run a
 container:
 
 ```bash
-docker run -d --name react-frontend-container react-frontend-image:latest
+docker run -d --name next-frontend-container next-frontend-image:latest
 ```
 
 To ensure that a container was actually made go to Docker Desktop and
@@ -355,21 +357,20 @@ docker ps -a
 You may also see the logs (in realtime by adding the flag `--follow`):
 
 ```bash
-docker logs react-frontend-container
-docker logs react-frontend-container --follow
+docker logs next-frontend-container
+docker logs next-frontend-container --follow
 ```
 
 Or you may inspect the containers configurations with the command:
 
 ```bash
-docker inspect react-frontend-container
+docker inspect next-frontend-container
 ```
 
 <details>
 <summary>🤫 Want a life hack to show all your friends?</summary>
 
-Instead of entering the name of the container, which in our case is _
-react-frontend-container_, we can also use a selection (from the
+Instead of entering the name of the container, which in our case is _next-frontend-container_, we can also use a selection (from the
 beginning) of the container ID which is enough for Docker Engine to
 distinct the container from other containers running on your machine.
 

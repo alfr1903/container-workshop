@@ -21,8 +21,7 @@ for the majority of people.
 
 ## Prerequisites
 
-- Install a _container image build tool_ and _
-  container runtime_, the simplest
+- Install a _container image build tool_ and _container runtime_, the simplest
   beeing the all-in-one solution [Docker
   Desktop](https://www.docker.com/products/docker-desktop/)
   . See [Docker
