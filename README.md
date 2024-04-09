@@ -36,7 +36,7 @@ for the majority of people.
   want
   to `git clone git@github.com:alfr1903/container-workshop.git`
 - This is a follow-up workshop on
-  a [react workshop](https://github.com/Markusdreyer/react-workshop).
+  a [react workshop](https://github.com/Kpaubert/oslo-tech-colledge/tree/finished-version).
   Even though it is recommended to be familiar with the application
   made in that
   workshop, it is not a requirement for being able to complete this
@@ -48,4 +48,3 @@ for the majority of people.
 2. [Run App in Container](./02-run-app-in-container)
 3. [Enter Running Container](./03-enter-running-container)
 4. [Multi Container Communication](./04-multi-container-communication)
-5. [Learning Material](./69-learning-material)
