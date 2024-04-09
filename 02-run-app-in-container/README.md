@@ -194,59 +194,61 @@ content of your current `index.ts` file located
 in `react-workshop/backend`.
 
 ```ts
-import {Request, Response} from "express";
+import { StreamingTextResponse } from 'ai';
+import { NextRequest } from 'next/server';
 
-const express = require("express");
-const dotenv = require("dotenv");
-const cors = require("cors");
+export const runtime = 'edge';
 
-dotenv.config();
+const furiousChatGPTResponse = `
+No no no no no!
+These ingredients are NOT going to cut it! 
+What am i cooking for, a low-budget funeral?? 
 
-const app = express();
-app.use(express.json());
-app.use(cors());
-const port = process.env.PORT || 8000;
+Here is a REAL recipe, I present to you the Moonlit Dreamcatcher Delight!
 
-app.listen(port, () => {
-    console.log(`[server]: Server is running at https://localhost:${port}`);
-});
+ingredients:
 
-app.post('/recipes', async (req: Request, res: Response) => {
-    console.info('Received recipe request with request body: ', req.body);
-    const ingredients: [string] = req.body.ingredients;
-    console.log(ingredients)
-    if (!ingredients || ingredients.length < 1) {
-        const error = {
-            message: "No ingredients provided, aborting request",
-        };
-        console.error(error.message);
-        res.status(400).send(error);
-        return;
+    1 cup of cloud fluff (alternatively, use the lightest whipped cream you can find)
+    3 slices of moonbeam (a thin slice of pearlescent edible glitter gelatin will do)
+    A pinch of starlight sparkle (edible glitter or sugar crystals work well)
+    5 drops of essence of night breeze (a mix of lavender and mint extract)
+    A handful of dreamberries (blueberries dipped in a shimmering edible silver dust)
+    2 spoons of solar syrup (a golden honey and saffron blend)
+    1 piece of the rainbow’s end (a slice of multicolored layer cake)
+    A whisper of unicorn laughter (a pinch of pop rocks for a surprising fizz)
+
+Equipment:
+
+    A mixing bowl as light as a feather
+    A spoon made from the wishes of a shooting star
+    Serving plates that have caught the first light of dawn
+
+Preparation:
+
+    Begin by laying your cloud fluff at the base of your serving plate, spreading it evenly to form a cushion of dreams.
+    Carefully place the moonbeam slices atop the cloud fluff, allowing them to catch the light and shimmer.
+    Sprinkle the starlight sparkle gently over everything, ensuring a delicate twinkle is visible with every glance.
+    In a feather-light mixing bowl, combine the essence of night breeze with the dreamberries. Stir gently with your shooting star spoon until the berries are coated in a mist of flavor.
+    Drizzle the solar syrup in a spiral, starting from the center and moving outward, to mimic the galaxy’s spin.
+    Artfully arrange the slice of the rainbow’s end on the side, providing a burst of color and a gateway to flavors unknown.
+    For the final touch, whisper your happiest thought over the dish and sprinkle it with the unicorn laughter. The pop rocks add not just a surprise but also the magic of joy and laughter to every bite.
+
+Serving Instructions:
+
+Serve this dish under a canopy of twinkling lights or by the gentle luminescence of a full moon. It's best enjoyed with an open heart and a vivid imagination, allowing each bite to transport you to a world of dreams and wonders.
+
+`;
+
+export async function POST(req: NextRequest) {
+  await req.json();
+  const stream = new ReadableStream({
+    start(controller) {
+      controller.enqueue(furiousChatGPTResponse);
+      controller.close();
     }
-
-    console.log("New recipe request! Ingredients: ", ingredients);
-    const recipe = {
-        "title": "The Recipe 101",
-        "description": "This is a recipe that will always work, perfect for everyone!",
-        "ingredients": ingredients,
-        "steps": [
-            "1. Cut all vegetables",
-            "2. Slice and spice fish or meat",
-            "3. Heat whatever needs to be heated",
-            "4. Put on a timer",
-            "5. Sit down and wait with whatever you do to chill",
-            "6. Put together a fresh salad",
-            "7. Put it all together on a plate",
-            "8. Enjoy!"
-        ],
-    }
-    res.send(recipe)
-});
-
-app.get("/checkLiveness", async (req: Request, res: Response) => {
-    console.log("We are live");
-    res.send("Hi frontend 👋 \n")
-});
+  });
+  return new StreamingTextResponse(stream);
+}
 ```
 
 Before you continue on the tasks make sure that your
