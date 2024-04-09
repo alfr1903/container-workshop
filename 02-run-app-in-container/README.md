@@ -159,12 +159,12 @@ it is a bit tricky to explain.
 ## 🫵🏽 Try it out yourself
 
 Remember
-the [React workshop](https://github.com/Markusdreyer/react-workshop.git)
-that you may have participated in a month back?
+the [Next/React workshop](https://github.com/Kpaubert/oslo-tech-colledge/tree/finished-version/next-workshop)
+that you may have participated a while back?
 Wouldn't it be cool to containerize that?! 🤔Let's
 do it!
 
-First, you need to move or copy the folder, _react-workshop_, that you
+First, you need to move or copy the folder, _next-workshop_, that you
 cloned from the
 workshop. Use the following command to do so, but
 remember
@@ -175,15 +175,15 @@ directory or adapt the destination path below.
 
 ```bash
 # Copy - recommended:
-cp <path/to/the/react-workshop/on/your/machine> 02-run-app-in-container
+cp <path/to/the/next-workshop/on/your/machine> 02-run-app-in-container
 
 # Or move:
-mv <path/to/the/react-workshop/on/your/machine> 02-run-app-in-container
+mv <path/to/the/next-workshop/on/your/machine> 02-run-app-in-container
 ```
 
 Or if you have not participated in the workshop or you were not able
 to finish, there is a bare minimum version of the project
-in [react-workshop-cheat](react-workshop-cheat) that you can use.
+in [next-workshop-cheat](next-workshop-cheat) that you can use.
 
 If you are using your own project you might not have access to the API
 keys to connect
