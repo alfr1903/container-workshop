@@ -92,36 +92,9 @@ Now try running the above command again.
 Use the arrows to navigate to the line where the Title text value is set (
 🤫line 17) and change it to whatever you find fitting.
 
-### Task 3.3 - Rebuild the application
-
-#### 3.3.1 Simple
-
 After changing the file, you might have noticed that nothing changes on the website. This is because we are running the `npm build` and `npm start` commands, instead of `npm run dev`. If you look inside the package.json file, you can see that these commands point to Next commands, where the `next build` command builds a compact and efficient version of the product, and `npm start` runs that build. This is what is meant for actually deploying an application for use.
 
-Now, you're already inside the shell inside the docker container with the earlier command
-
-```bash
-docker exec -it <container_id/container_name> sh
-```
-
-Is there something you can do from here to show the changes?
-
-<details>
-<summary>✅ Solution 3.3.1 Simple</summary>
-
-You can run these commands inside the shell
-
-```bash
-npm stop
-npm build
-npm start
-```
-
-</details>
-
-#### 3.3.2 Advanced
-
-This can be a tedious process, so obviously this is not something we usually do during development.
+Trying to force-rebuilding the program while the container is running is quite difficult, and would be a tedious process, so obviously this is not something we usually do during development. Instead, you could have docker run `npm run dev` instead of `npm build` and `npm start`.
 
 `npm run dev` runs a "bloated" version of the application, which means it will simply run your files as they are and include all the dependencies listed under "devDependencies". This often includes different tools you would use as a developer, which aren't necessary in a production environment, and will usually also be more "verbose", which means tools and processes will log more information in the terminal about what is happening.
 
@@ -132,11 +105,14 @@ Now, we don't want to change our dockerfile to run `npm run dev`. It's important
 Create this new dockerfile and try to get a container up and running that will hot-reload when you do changes like you did in vim or nano earlier!
 
 <details>
-<summary>✅ Solution 3.3.2 Advanced</summary>
-Simply copy the other dockerfile, rename it something like 'Dockerfile.dev', remove the `npm build` command, and replace `npm start` with `npm run dev`!.
+<summary>✅ Solution 3.2</summary>
+Simply copy the other dockerfile, rename it something like 'Dockerfile.dev', remove the `npm build` command, and replace `npm start` with `npm run dev`!
+
+Then build a new image, make a new docker container from that image and try to make changes in vim or nano and see the page hot-reload!
+
 </details>
 
-#### 3.3.2 Pro 🔥
+### 3.3 Best of both worlds 🌍
 
 You might have noticed that this still isn't really that useful. You still have to use vim or node in a terminal to make changes, and those changes won't persist into the next time you build an image!
 
@@ -148,7 +124,7 @@ Volumes
 </details>
 
 <details>
-<summary>✅ Solution 3.3.2 Pro</summary>
+<summary>✅ Solution 3.3</summary>
 The solution to this depends what you want to only copy once, and what you want to constantly update, but the simplest dockerfile.dev would be:
 
 ```dockerfile
