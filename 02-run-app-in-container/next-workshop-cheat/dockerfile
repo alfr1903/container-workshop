@@ -1,5 +1,5 @@
 # ==== CONFIGURE =====
-# Use a Node base image using version 16-alpine
+# Use a Node base image using version 20-alpine
 FROM
 
 # Set the working directory to /app inside the container
