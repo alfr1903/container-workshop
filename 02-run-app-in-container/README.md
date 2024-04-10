@@ -179,7 +179,7 @@ cp <path/to/the/next-workshop/on/your/machine> 02-run-app-in-container
 mv <path/to/the/next-workshop/on/your/machine> 02-run-app-in-container
 ```
 
-Or if you have not participated in the workshop or you were not able
+If you have not participated in the workshop or you were not able
 to finish, there is a bare minimum version of the project
 in [next-workshop-cheat](next-workshop-cheat) that you can use.
 
