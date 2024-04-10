@@ -24,7 +24,7 @@ As you might notice, if being of the observant kind, your _magic
 cookbook_ is actually not so magic anymore 🥹 This is because we
 changed the backend to being a mocked version of the openAI. The
 response you are getting from the backend is nothing more than a
-hardcoded recipe that is _very_ generic.
+hardcoded recipe.
 
 Lets adapt our frontend to tell us the truth!
 
@@ -34,26 +34,26 @@ First you need to run the following command to get into the
 interactive shell of the running container:
 
 ```bash
-docker exec -it <container_id/conainer_name> sh
+docker exec -it <container_id/container_name> sh
 ```
 
 Type `ls` to get some overview. You should see the following contents:
 
+- **app/**
+-  next-env.d.ts
 - **node_modules/**
 - package-lock.json
 - package.json
-- **public/**
-- **src/**
 - tsconfig.json
 
-The heading `Your Name's Magic CookBook` is located in `App.tsx`, can
+The Title text value `TechCollEDGE cookbook` is located in `app/page.tsx`, can
 you display it's content in the interactive shell terminal?
 
 <details>
 <summary>✅ Solution 3.1</summary>
 
-After opening the shell, type `cd src` where `App.tsx` exists.
-Type `ls` to ensure it. Type `cat App.tsx` to see the content.
+After opening the shell, type `cd app` where `page.tsx` exists.
+Type `ls` to ensure it. Type `cat page.tsx` to see the content.
 
 </details>
 
@@ -68,8 +68,8 @@ For editing the content you might use a text editor such as `nano`
 or `vim`.
 
 ```sh
-nano App.tsx
-vim App.tsx
+nano page.tsx
+vim page.tsx
 ```
 
 Getting an error that your shell cannot find either `nano` or `vim`?
@@ -95,7 +95,8 @@ Now try running the above command again.
 > save and `q` or `:q!` (short for quit) if you wish to abort the
 editing._
 
-Use the arrows to navigate to the line where the heading is set (
-🤫line 46) and change it to whatever you find soothing. Save the file
-and you should see the updates in your running application in the
-browser. Cool?
+Use the arrows to navigate to the line where the Title text value is set (
+🤫line 17) and change it to whatever you find fitting.
+
+
+TODO: write section on npm run build + npm start vs. npm run dev
