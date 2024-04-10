@@ -98,37 +98,36 @@ Use the arrows to navigate to the line where the Title text value is set (
 
 After changing the file, you might have noticed that nothing changes on the website. This is because we are running the `npm build` and `npm start` commands, instead of `npm run dev`. If you look inside the package.json file, you can see that these commands point to Next commands, where the `next build` command builds a compact and efficient version of the product, and `npm start` runs that build. This is what is meant for actually deploying an application for use.
 
-If you want your changes to be deployed to the container, you will have to build the image again, kill the running container and make a new one based on the new image.
+Now, you're already inside the shell inside the docker container with the earlier command
+
+```bash
+docker exec -it <container_id/container_name> sh
+```
+
+Is there something you can do from here to show the changes?
 
 <details>
 <summary>✅ Solution 3.3.1 Simple</summary>
 
-You just need to run the same commands as earlier to delete the image and container:
+You can run these commands inside the shell
 
 ```bash
-docker stop next-frontend-container
-docker rm next-frontend-container
-docker rmi next-frontend-image
-```
-
-And run the same commands as earlier to recreate them and run them:
-
-```bash
-docker build -t next-frontend-image .
-docker run -d --name next-frontend-container next-frontend-image:latest
+npm stop
+npm build
+npm start
 ```
 
 </details>
 
 #### 3.3.2 Advanced
 
-This can be a tedious process, even if you don't use docker, so obviously this is not something we usually do during development.
+This can be a tedious process, so obviously this is not something we usually do during development.
 
 `npm run dev` runs a "bloated" version of the application, which means it will simply run your files as they are and include all the dependencies listed under "devDependencies". This often includes different tools you would use as a developer, which aren't necessary in a production environment, and will usually also be more "verbose", which means tools and processes will log more information in the terminal about what is happening.
 
 One common feature of dev scripts is hot-reloading, which is what keeps updating the webpage as you make changes. To make any project hot-reloadable, you'll need to find a tool that keeps watch of your files and forces a reload, like nodemon (usually for node but can work with other files too) and integrate them into your `npm run dev` script. Thankfully, the `next dev` command comes pre-packaged with hot-reloading, so we can just use the `npm run dev` already built into the project.
 
-Now, we don't want to change our dockerfile to run `npm run dev`. It's important to have a dockerfile for production. Instead, we can make a new file, `Dockerfile.dev`(the names of dockerfiles are arbitrary, but this is the common practice), and use the `-f <filename>` argument to specify which dockerfile to use when we build an image (you might want to name this image and the container something different, like adding '-dev' to the names).
+Now, we don't want to change our dockerfile to run `npm run dev`. It's important to have a dockerfile for production. Instead, we can make a new file, `Dockerfile.dev`(the names of dockerfiles are arbitrary, but this is the common practice), and use the `-f <dockerfile_name>` argument to specify which dockerfile to use when we build an image (you might want to name this image and the container something different, like adding '-dev' to the names).
 
 Create this new dockerfile and try to get a container up and running that will hot-reload when you do changes like you did in vim or nano earlier!
 
