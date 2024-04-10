@@ -183,11 +183,6 @@ If you have not participated in the workshop or you were not able
 to finish, there is a bare minimum version of the project
 in [next-workshop-cheat](next-workshop-cheat) that you can use.
 
-If you are using your own project you might not have access to the API
-keys to connect
-to openAI so we will exchange the backend with a somewhat simpler
-backend
-
 If you are using your own version of the [next-workshop](next-workshop) and have moved/copied it to _02-run-app-in-container_
 we will have to dumb down the ChatGPT backend a bit to reduce complexity. Navigate to `next-workshop/app/api/chat/route.ts` and replace the contents with the following:
 
