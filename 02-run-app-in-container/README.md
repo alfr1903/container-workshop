@@ -323,7 +323,7 @@ COPY [ "package.json", "package-lock.json", "tsconfig.json", "./"]
 # ==== BUILD =====
 # Install dependencies
 RUN npm install
-RUN npm run build
+RUN npm run build -- --no-lint
 
 # ==== RUN =======
 # Start the app
@@ -505,20 +505,17 @@ is
 </details>
 
 Open Docker Desktop and see that the container is running. Click on
-the container and you should see the following logs:
+the container and you should see something similar to the following logs:
 
 ```bash
-2023-03-10 10:53:46 > react-workshop@0.1.0 start
-2023-03-10 10:53:46 > react-scripts start
-2023-03-10 10:53:46 
-2023-03-10 10:53:50 Starting the development server...
-2023-03-10 10:53:50 
-2023-03-10 10:54:03 Compiled successfully!
-2023-03-10 10:54:03 
-2023-03-10 10:54:03 You can now view react-workshop in the browser.
-2023-03-10 10:54:03 
-2023-03-10 10:54:03   Local:            http://localhost:3000
-2023-03-10 10:54:03   On Your Network:  http://172.17.0.2:3000
+2024-04-10 09:02:57 
+2024-04-10 09:02:57 > next-workshop@0.1.0 start
+2024-04-10 09:02:57 > next start
+2024-04-10 09:02:57 
+2024-04-10 09:02:57    ▲ Next.js 14.1.0
+2024-04-10 09:02:57    - Local:        http://localhost:3000
+2024-04-10 09:02:57 
+2024-04-10 09:02:57  ✓ Ready in 245ms
 ```
 
 ### Task 2.3 - Exposing the Container
@@ -530,14 +527,14 @@ Stop and remove the container either in Docker Desktop or in the
 terminal:
 
 ```bash
-docker stop react-frontend-container
-docker rm react-frontend-container
+docker stop next-frontend-container
+docker rm next-frontend-container
 ```
 
 And run the container again with an additional flag:
 
 ```bash
-docker run -d -p 3001:3000 --name react-frontend-container react-frontend-image:latest
+docker run -d -p 3001:3000 --name next-frontend-container next-frontend-image:latest
 ```
 
 The `-p` flag exposes a port on your local machine and maps it to a
@@ -562,15 +559,15 @@ see if it worked stop and remove the running container and remove the
 image:
 
 ```bash
-docker stop react-frontend-container
-docker rm react-frontend-container
-docker rmi react-frontend-image
+docker stop next-frontend-container
+docker rm next-frontend-container
+docker rmi next-frontend-image
 ```
 
 Rebuild the image:
 
 ```bash
-docker build -t react-frontend-image .
+docker build -t next-frontend-image .
 ```
 
 And run a new container:
@@ -579,7 +576,7 @@ _NB: do you see what you need to change in the below command for this
 to work?_
 
 ```bash
-docker run -d -p 3001:3000 --name react-frontend-container react-frontend-image:latest
+docker run -d -p 3001:3000 --name next-frontend-container next-frontend-image:latest
 ```
 
 <details>
@@ -594,7 +591,7 @@ to `5050`.
 The full command should be like this:
 
 ```bash
-docker run -d -p 3001:5050 --name react-frontend-container react-frontend-image:latest
+docker run -d -p 3001:5050 --name next-frontend-container next-frontend-image:latest
 ```
 
 </details>
@@ -604,18 +601,24 @@ docker run -d -p 3001:5050 --name react-frontend-container react-frontend-image:
 
 ```dockerfile
 # ==== DOCKERFILE FOR FRONTEND =====
-# Use a Node 16 base image
-FROM node:16-alpine
+# Use a Node 20 base image
+FROM node:20-alpine
+
 # Set the working directory to /app inside the container
 WORKDIR /app
-# Copy app files
-COPY src src
-COPY public public
+
+# Copy necessary source code folders/files
+COPY app app
 COPY [ "package.json", "package-lock.json", "tsconfig.json", "./"]
+
+# Set ENV variable
+ENV PORT=5050
+
 # ==== BUILD =====
 # Install dependencies
 RUN npm install
-ENV PORT=5050
+RUN npm run build -- --no-lint
+
 # ==== RUN =======
 # Start the app
 CMD [ "npm", "start" ]
